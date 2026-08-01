@@ -16,14 +16,14 @@ const profiles = [
     rank: "3★",
     rating: "Peak 1700",
     link: "https://www.codechef.com/users/gaze_wood_01",
-    logo: "https://cdn.iconscout.com/icon/free/png-256/codechef-3628694-3029919.png" // placeholder
+    logo: "https://cdn.iconscout.com/icon/free/png-256/codechef-3628694-3029919.png"
   },
   {
     name: "LeetCode",
     handle: "gaze_wood_01",
     rank: "500+ Solved",
-    rating: "Peak 1600",
-    link: "https://leetcode.com/u/devanshrai23/",
+    rating: "Peak 1600", 
+    link: "https://leetcode.com/u/gaze_wood_01/",
     logo: "https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png"
   }
 ];
