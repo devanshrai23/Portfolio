@@ -63,6 +63,11 @@ export default function Contact() {
         (e.target as HTMLFormElement).reset();
         captchaRef.current?.resetCaptcha();
         setCaptchaToken(null);
+        
+        // Refresh the page after 2.5 seconds
+        setTimeout(() => {
+          window.location.reload();
+        }, 2500);
       } else {
         setStatus("error");
         setMessage(data.message || "Something went wrong. Please try again.");
