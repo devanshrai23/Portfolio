@@ -1,12 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const captchaRef = useRef<HCaptcha>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -24,7 +27,15 @@ export default function Contact() {
       return;
     }
 
+    if (!captchaToken) {
+      setStatus("error");
+      setMessage("Please complete the captcha to submit.");
+      setIsSubmitting(false);
+      return;
+    }
+
     formData.append("access_key", accessKey);
+    formData.append("h-captcha-response", captchaToken);
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -38,6 +49,8 @@ export default function Contact() {
         setStatus("success");
         setMessage("Thank you! Your message has been sent successfully.");
         (e.target as HTMLFormElement).reset();
+        captchaRef.current?.resetCaptcha();
+        setCaptchaToken(null);
       } else {
         setStatus("error");
         setMessage(data.message || "Something went wrong. Please try again.");
@@ -119,6 +132,17 @@ export default function Contact() {
                   className="w-full px-5 py-4 bg-background border border-border-subtle rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-accent-indigo focus:border-transparent transition-all font-sans resize-none"
                   placeholder="How can I help you?"
                 ></textarea>
+              </div>
+
+              <div className="flex justify-center my-4">
+                <HCaptcha 
+                  ref={captchaRef}
+                  sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
+                  onVerify={(token) => {
+                    setCaptchaToken(token);
+                    if (status === "error") setStatus("idle");
+                  }}
+                />
               </div>
               
               <button
