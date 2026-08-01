@@ -34,13 +34,20 @@ export default function Contact() {
       return;
     }
 
-    formData.append("access_key", accessKey);
-    formData.append("h-captcha-response", captchaToken);
+    formData.set("access_key", accessKey);
+    formData.set("h-captcha-response", captchaToken);
+
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        body: formData,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: json,
       });
 
       const data = await response.json();
