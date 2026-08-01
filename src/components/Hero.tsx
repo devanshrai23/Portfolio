@@ -82,7 +82,7 @@ export default function Hero() {
               >
                 <div className="w-full h-full rounded-[2.5rem] overflow-hidden bg-surface relative">
                   <img 
-                    src="/profile.jpg" 
+                    src="/Profile.jpg" 
                     alt="Devansh Rai" 
                     className="w-full h-full object-cover"
                     onError={(e) => {
