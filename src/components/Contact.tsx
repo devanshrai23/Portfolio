@@ -40,7 +40,7 @@ export default function Contact() {
     
     // Custom Email Settings
     formData.set("subject", `New Portfolio Message from ${formData.get("name")}`);
-    formData.set("from_name", "Devansh's Portfolio");
+    formData.set("from_name", formData.get("name") as string);
 
     const object = Object.fromEntries(formData);
     const json = JSON.stringify(object);
