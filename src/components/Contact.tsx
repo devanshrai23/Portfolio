@@ -37,6 +37,10 @@ export default function Contact() {
     formData.set("access_key", accessKey);
     formData.set("h-captcha-response", captchaToken);
     formData.delete("g-recaptcha-response");
+    
+    // Custom Email Settings
+    formData.set("subject", `New Portfolio Message from ${formData.get("name")}`);
+    formData.set("from_name", "Devansh's Portfolio");
 
     const object = Object.fromEntries(formData);
     const json = JSON.stringify(object);
