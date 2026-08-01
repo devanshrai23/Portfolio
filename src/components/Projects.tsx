@@ -94,8 +94,12 @@ export default function Projects() {
                       <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
                     </div>
                     {/* Mockup content area */}
-                    <div className="flex-1 w-full bg-zinc-100/5 flex items-center justify-center text-zinc-900/20 font-sans font-bold text-2xl uppercase tracking-widest">
-                      Mockup Placeholder
+                    <div className="flex-1 w-full bg-zinc-100/5 flex items-center justify-center text-zinc-900/20 font-sans font-bold text-2xl uppercase tracking-widest overflow-hidden">
+                      {project.image ? (
+                        <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+                      ) : (
+                        "Mockup Placeholder"
+                      )}
                     </div>
                   </div>
                 </div>
